@@ -2,7 +2,7 @@ import openrouteservice
 from openrouteservice import convert
 
 # Clave de API
-api_key = '5b3ce3597851110001cf62481079697709684885bce6d417295f374a'  # Reemplaza con tu clave si es necesario
+api_key = '5b3ce3597851110001cf62481079697709684885bce6d417295f374a'
 client = openrouteservice.Client(key=api_key)
 
 # Coordenadas de ciudades conocidas
@@ -51,27 +51,20 @@ def mostrar_resultados(ruta):
     print(f"Duración estimada del viaje: {horas} horas, {minutos} minutos, {segundos} segundos")
     print(f"Combustible estimado necesario: {consumo_litros:.2f} litros")
 
-    # Instrucciones paso a paso
     instrucciones = features['properties']['segments'][0]['steps']
     print("\nNarrativa del viaje:")
     for paso in instrucciones:
         print(f"- {paso['instruction']}")
 
-# Bucle interactivo
-while True:
-    print("\n=== CALCULADORA DE RUTA CON OPENROUTESERVICE ===")
-    origen_nombre = input("Ingrese la Ciudad de Origen (o 'q' para salir): ").strip().lower()
-    if origen_nombre == 'q':
-        break
+# --- Script automatizado (sin input) ---
 
-    destino_nombre = input("Ingrese la Ciudad de Destino (o 'q' para salir): ").strip().lower()
-    if destino_nombre == 'q':
-        break
+origen_nombre = "santiago"
+destino_nombre = "ovalle"
 
-    origen_coords = obtener_coordenadas(origen_nombre)
-    destino_coords = obtener_coordenadas(destino_nombre)
+origen_coords = obtener_coordenadas(origen_nombre)
+destino_coords = obtener_coordenadas(destino_nombre)
 
-    if origen_coords and destino_coords:
-        ruta = calcular_ruta(origen_coords, destino_coords)
-        if ruta:
-            mostrar_resultados(ruta)
+if origen_coords and destino_coords:
+    ruta = calcular_ruta(origen_coords, destino_coords)
+    if ruta:
+        mostrar_resultados(ruta)
